@@ -56,7 +56,7 @@ func partA() {
 			firstIteration = false
 			index := 1
 			for i := 0; i < m; i++ {
-				if (index < n) && strings.TrimSpace(string(text[index])) != "" {
+				if strings.TrimSpace(string(text[index])) != "" {
 					stacks[i].Append(string(text[index]))
 				}
 				index += 4
@@ -70,7 +70,7 @@ func partA() {
 				}
 				index = 1
 				for i := 0; i < m; i++ {
-					if (index < n) && strings.TrimSpace(string(text[index])) != "" {
+					if strings.TrimSpace(string(text[index])) != "" {
 						stacks[i].Append(string(text[index]))
 					}
 					index += 4
@@ -127,7 +127,7 @@ func partB() {
 			firstIteration = false
 			index := 1
 			for i := 0; i < m; i++ {
-				if (index < n) && strings.TrimSpace(string(text[index])) != "" {
+				if strings.TrimSpace(string(text[index])) != "" {
 					stacks[i].Append(string(text[index]))
 				}
 				index += 4
@@ -141,7 +141,7 @@ func partB() {
 				}
 				index = 1
 				for i := 0; i < m; i++ {
-					if (index < n) && strings.TrimSpace(string(text[index])) != "" {
+					if strings.TrimSpace(string(text[index])) != "" {
 						stacks[i].Append(string(text[index]))
 					}
 					index += 4
@@ -164,20 +164,18 @@ func partB() {
 					log.Fatalln(err)
 				}
 				var cratesToTransport []string
+
+				for i := 0; i < nMoves; i++ {
+					crate := stacks[initialQueue-1].Pop()
+					cratesToTransport = append(cratesToTransport, crate)
+				}
 				if nMoves > 1 {
-					for i := 0; i < nMoves; i++ {
-						crate := stacks[initialQueue-1].Pop()
-						cratesToTransport = append(cratesToTransport, crate)
-					}
+
 					for i := nMoves - 1; i >= 0; i-- {
 						crate := cratesToTransport[i]
 						stacks[finalQueue-1].AppendLeft(crate)
 					}
 				} else {
-					for i := 0; i < nMoves; i++ {
-						crate := stacks[initialQueue-1].Pop()
-						cratesToTransport = append(cratesToTransport, crate)
-					}
 					for i := 0; i < nMoves; i++ {
 						crate := cratesToTransport[i]
 						stacks[finalQueue-1].AppendLeft(crate)
