@@ -57,6 +57,7 @@ func partA() {
 					dir := "/" + strings.TrimLeft(strings.Join(cwdStruct[:i+1], "/"), "/")
 					dirSizes[dir] += size
 				}
+				filesFound[file] = struct{}{}
 			}
 
 		}
@@ -114,6 +115,7 @@ func partB() {
 					dir := "/" + strings.TrimLeft(strings.Join(cwdStruct[:i+1], "/"), "/")
 					dirSizes[dir] += size
 				}
+				filesFound[file] = struct{}{}
 			}
 
 		}
