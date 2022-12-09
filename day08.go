@@ -106,35 +106,35 @@ func partB() {
 	for i := 1; i < m-1; i++ {
 		for j := 1; j < n-1; j++ {
 			tree := grid[j][i]
-			distanceToLeftEdge := 0
-			distanceToRightEdge := 0
-			distanceToUpEdge := 0
-			distanceToDownEdge := 0
+			TreesInSightLeft := 0
+			TreesInSightRight := 0
+			TreesInSightUp := 0
+			TreesInSightDown := 0
 			for k := i - 1; k >= 0; k-- {
-				distanceToLeftEdge += 1
+				TreesInSightLeft += 1
 				if grid[j][k] >= tree {
 					break
 				}
 			}
 			for k := i + 1; k < m; k++ {
-				distanceToRightEdge += 1
+				TreesInSightRight += 1
 				if grid[j][k] >= tree {
 					break
 				}
 			}
 			for k := j - 1; k >= 0; k-- {
-				distanceToUpEdge += 1
+				TreesInSightUp += 1
 				if grid[k][i] >= tree {
 					break
 				}
 			}
 			for k := j + 1; k < n; k++ {
-				distanceToDownEdge += 1
+				TreesInSightDown += 1
 				if grid[k][i] >= tree {
 					break
 				}
 			}
-			scenicScore := distanceToDownEdge * distanceToUpEdge * distanceToRightEdge * distanceToLeftEdge
+			scenicScore := TreesInSightDown * TreesInSightUp * TreesInSightRight * TreesInSightLeft
 			// fmt.Println(scenicScore, j, i, tree)
 			if scenicScore > highestScenicScore {
 				highestScenicScore = scenicScore
