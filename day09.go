@@ -225,6 +225,6 @@ func partB() {
 	fmt.Println(len(positions))
 }
 func main() {
-	partA() // 6098
-	partB() // 2597
+	partA()
+	partB()
 }
