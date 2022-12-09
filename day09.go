@@ -30,6 +30,45 @@ func registerPosition(positions map[string]struct{}, tailPosition []int) {
 	positions[position] = struct{}{}
 }
 
+func tailMove(currentTail, previousTail []int) {
+	if currentTail[0]-previousTail[0] == 0 {
+		diff := previousTail[1] - currentTail[1]
+		if diff > 0 {
+			currentTail[1] += 1
+		} else if diff < 0 {
+			currentTail[1] -= 1
+		}
+	} else if currentTail[1]-previousTail[1] == 0 {
+		diff := previousTail[0] - currentTail[0]
+		if diff > 0 {
+			currentTail[0] += 1
+		} else if diff < 0 {
+			currentTail[0] -= 1
+		}
+	} else {
+		xdiff := previousTail[0] - currentTail[0]
+		ydiff := previousTail[1] - currentTail[1]
+		slope := float64(ydiff) / float64(xdiff)
+		if slope > 0 {
+			if xdiff < 0 && ydiff < 0 {
+				currentTail[1] -= 1
+				currentTail[0] -= 1
+			} else {
+				currentTail[1] += 1
+				currentTail[0] += 1
+			}
+		} else {
+			if xdiff < 0 {
+				currentTail[0] -= 1
+				currentTail[1] += 1
+			} else {
+				currentTail[0] += 1
+				currentTail[1] -= 1
+			}
+		}
+	}
+}
+
 func partA() {
 	scanner := bufio.NewScanner(strings.NewReader(s))
 	positions := map[string]struct{}{}
@@ -89,45 +128,6 @@ func partA() {
 	// fmt.Println(positions)
 	fmt.Println(len(positions))
 
-}
-
-func tailMove(currentTail, previousTail []int) {
-	if currentTail[0]-previousTail[0] == 0 {
-		diff := previousTail[1] - currentTail[1]
-		if diff > 0 {
-			currentTail[1] += 1
-		} else if diff < 0 {
-			currentTail[1] -= 1
-		}
-	} else if currentTail[1]-previousTail[1] == 0 {
-		diff := previousTail[0] - currentTail[0]
-		if diff > 0 {
-			currentTail[0] += 1
-		} else if diff < 0 {
-			currentTail[0] -= 1
-		}
-	} else {
-		xdiff := previousTail[0] - currentTail[0]
-		ydiff := previousTail[1] - currentTail[1]
-		slope := float64(ydiff) / float64(xdiff)
-		if slope > 0 {
-			if xdiff < 0 && ydiff < 0 {
-				currentTail[1] -= 1
-				currentTail[0] -= 1
-			} else {
-				currentTail[1] += 1
-				currentTail[0] += 1
-			}
-		} else {
-			if xdiff < 0 {
-				currentTail[0] -= 1
-				currentTail[1] += 1
-			} else {
-				currentTail[0] += 1
-				currentTail[1] -= 1
-			}
-		}
-	}
 }
 
 type Position []int
